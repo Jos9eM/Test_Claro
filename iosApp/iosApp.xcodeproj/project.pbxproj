@@ -75,6 +75,7 @@
 				B29D6A841C1A4B0A2B96FD43 /* Sources */,
 				4508EB4F5C8990883D282C7F /* Frameworks */,
 				7D9070D7FC0196C10031C842 /* Resources */,
+				0C856BEB2FBE489D007A3201 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -135,6 +136,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0C856BEB2FBE489D007A3201 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :composeApp:embedAndSignAppleFrameworkForXcode\n";
+		};
 		A8C7C743D2812ACBA9192D8C /* Compile Kotlin Framework */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
