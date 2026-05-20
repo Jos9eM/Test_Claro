@@ -16,7 +16,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.hitss.test_claro.components.CarouselCard
+import com.hitss.test_claro.domain.model.MovieItem
 import com.hitss.test_claro.domain.remote.MovieService
 import com.hitss.test_claro.domain.util.onFailure
 import com.hitss.test_claro.domain.util.onSuccess
@@ -29,13 +32,17 @@ import org.koin.compose.koinInject
 @Composable
 @Preview
 fun App() {
-    MaterialTheme {
+    MaterialTheme(colorScheme = DarkColors) {
+
 
         val movieService: MovieService = koinInject()
-
+        var movieList by remember {
+            mutableStateOf<List<MovieItem>>(emptyList())
+        }
         var showContent by remember { mutableStateOf(false) }
         var resultText by remember { mutableStateOf("") }
         var isLoading by remember { mutableStateOf(false) }
+        var isError by remember { mutableStateOf(false) }
 
         Column(
             modifier = Modifier.background(MaterialTheme.colorScheme.primaryContainer)
@@ -52,19 +59,17 @@ fun App() {
 
                         movieService.retrieveTopRatedMovies().onSuccess { movies ->
 
-                                val titles = movies.joinToString("\n") {
-                                    it.title
-                                }
-
                                 withContext(Dispatchers.Main) {
-                                    resultText = titles
                                     isLoading = false
+                                    isError = false
+                                    movieList = movies
+
                                 }
                             }.onFailure { error ->
-
                                 withContext(Dispatchers.Main) {
-                                    resultText = "Error: $error"
                                     isLoading = false
+                                    isError = true
+                                    resultText = "Error: $error"
                                 }
                             }
                     }
@@ -78,11 +83,16 @@ fun App() {
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-
                     if (isLoading) {
-                        Text("Cargando...")
+                        Text("Cargando...", color = Color.White)
                     } else {
-                        Text(resultText)
+                        if(isError) {
+                            Text(resultText, color = Color.White)
+                        } else {
+                            CarouselCard(movieList) {
+                                println(it.title)
+                            }
+                        }
                     }
                 }
             }

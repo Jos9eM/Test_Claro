@@ -10,7 +10,8 @@ fun MovieDTO.toMovieItem(): MovieItem {
         title = title,
         posterPath = posterPath.toTmdbImageUrl(),
         backdropPath = backdropPath.toTmdbImageUrl(),
-        overview = overview
+        overview = overview,
+        voteAverage = voteAverage
     )
 }
 

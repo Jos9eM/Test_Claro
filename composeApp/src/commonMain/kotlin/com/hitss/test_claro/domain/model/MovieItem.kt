@@ -7,5 +7,6 @@ data class MovieItem(
     @SerialName("title") val title: String,
     @SerialName("poster_path") val posterPath: String,
     @SerialName("backdrop_path") val backdropPath: String,
-    @SerialName("overview") val overview: String
+    @SerialName("overview") val overview: String,
+    @SerialName("vote_average") val voteAverage: Double,
 )
