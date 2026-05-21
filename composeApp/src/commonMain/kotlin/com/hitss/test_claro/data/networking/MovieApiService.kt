@@ -36,6 +36,8 @@ class MovieApiService(private val client: HttpClient) : MovieService {
             headers {
                 append("Authorization", "Bearer ${UrlConstants.API_TOKEN}")
                 append("accept", "application/json")
+                append("Accept-Encoding", "identity")
+
             }
         }.map { movieDTO ->
             movieDTO.toImageFullUrls()

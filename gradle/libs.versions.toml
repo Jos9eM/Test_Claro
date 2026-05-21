@@ -40,6 +40,8 @@ coil-network = "3.4.0"
 jetbrains-core-bundle = "1.0.1"
 adaptive = "1.2.0"
 
+voyager = "1.0.1"
+
 
 [libraries]
 
@@ -105,6 +107,9 @@ sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sql
 # Coil
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil-network" }
+
+#Navegacion
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager"}
 
 [plugins]
 

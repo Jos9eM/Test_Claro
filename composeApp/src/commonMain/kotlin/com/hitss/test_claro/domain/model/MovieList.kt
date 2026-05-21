@@ -22,7 +22,6 @@ data class MovieDTO(
     @SerialName("vote_average") val voteAverage: Double,
     @SerialName("vote_count") val voteCount: Int,
     @SerialName("popularity") val popularity: Double,
-    @SerialName("genre_ids") val genreIds: List<Int> = emptyList(),
     @SerialName("adult") val adult: Boolean,
     @SerialName("video") val video: Boolean,
     @SerialName("softcore") val softcore: Boolean? = false,
