@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import com.hitss.test_claro.components.CarouselCard
 import com.hitss.test_claro.domain.model.MovieItem
 import com.hitss.test_claro.domain.remote.MovieService
@@ -91,8 +92,10 @@ class MovieListScreen: Screen {
                         if(isError) {
                             Text(resultText, color = Color.White)
                         } else {
-                            CarouselCard(movieList) {
-                                navigator?.push(MovieDetailScreen(it.id))
+                            CarouselCard(movieList) { idMovie ->
+                                navigator?.let { nav ->
+                                    openMovieDetail(idMovie.id, nav)
+                                }
                             }
                         }
                     }
@@ -101,3 +104,5 @@ class MovieListScreen: Screen {
         }
     }
 }
+
+expect fun openMovieDetail(movieId: Int, navigator: Navigator)
