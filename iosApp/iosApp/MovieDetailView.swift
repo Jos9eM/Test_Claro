@@ -10,16 +10,30 @@ struct MovieDetailView: View {
 
     let movieId: Int32
 
+    @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = MovieDetailViewModel()
 
     private let backgroundColor = Color(red: 0.07, green: 0.08, blue: 0.13)
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topLeading) {
             backgroundColor
                 .ignoresSafeArea()
 
             content
+
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 18, weight: .bold))
+                    .foregroundStyle(.white)
+                    .frame(width: 42, height: 42)
+                    .background(Color.black.opacity(0.35))
+                    .clipShape(Circle())
+            }
+            .padding(.top, 30)
+            .padding(.leading, 16)
         }
         .task {
             viewModel.load(movieId: movieId)
