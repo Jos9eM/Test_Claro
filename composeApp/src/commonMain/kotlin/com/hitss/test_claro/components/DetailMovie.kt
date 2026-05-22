@@ -1,6 +1,8 @@
 package com.hitss.test_claro.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,36 +14,68 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.navigator.LocalNavigator
 import coil3.compose.AsyncImage
 import com.hitss.test_claro.domain.model.MovieDTO
 import org.jetbrains.compose.resources.painterResource
 import test_claro.composeapp.generated.resources.Res
+import test_claro.composeapp.generated.resources.arrow_back
 import test_claro.composeapp.generated.resources.estrella
 
 @Composable
 fun DetailMovie(movie: MovieDTO?) {
 
+    val navigator = LocalNavigator.current
+
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
-        AsyncImage(
-            model = movie?.backdropPath?: "",
-            contentDescription = "Película",
-            contentScale = ContentScale.FillBounds,
+
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(300.dp)
-        )
+        ) {
+
+            AsyncImage(
+                model = movie?.backdropPath ?: "",
+                contentDescription = "Película",
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier.fillMaxSize().height(300.dp)
+            )
+
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(top = 20.dp, start = 20.dp)
+                    .size(40.dp)
+                    .clip(CircleShape)
+                    .background(Color.Black.copy(alpha = 0.35f))
+                    .clickable {
+                        navigator?.pop()
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    painter = painterResource(Res.drawable.arrow_back),
+                    contentDescription = "Back",
+                    tint = Color.White
+                )
+            }
+        }
         Spacer(modifier = Modifier.height(20.dp))
 
         Box(modifier = Modifier.padding(10.dp)) {
