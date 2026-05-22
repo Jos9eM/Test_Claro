@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,13 +40,13 @@ class MovieListScreen: Screen {
         val navigator = LocalNavigator.current
 
         val movieService: MovieService = koinInject()
-        var movieList by remember {
+        var movieList by rememberSaveable {
             mutableStateOf<List<MovieItem>>(emptyList())
         }
-        var showContent by remember { mutableStateOf(false) }
-        var resultText by remember { mutableStateOf("") }
-        var isLoading by remember { mutableStateOf(false) }
-        var isError by remember { mutableStateOf(false) }
+        var showContent by rememberSaveable { mutableStateOf(false) }
+        var resultText by rememberSaveable { mutableStateOf("") }
+        var isLoading by rememberSaveable { mutableStateOf(false) }
+        var isError by rememberSaveable { mutableStateOf(false) }
 
         Column(
             modifier = Modifier.background(MaterialTheme.colorScheme.primaryContainer)
